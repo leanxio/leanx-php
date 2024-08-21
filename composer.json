@@ -1,0 +1,26 @@
+{
+    "name": "leanx/leanx-php",
+    "description": "This package is to assist LeanX integration",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "firebase/php-jwt": "^6.0"
+    },
+    "require-dev": {
+        "guzzlehttp/guzzle": "^7.0",
+        "firebase/php-jwt": "^6.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Leanx\\LeanxSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wira Azharan"
+        }
+    ],
+    "minimum-stability": "stable",
+    "version": "1.1.5"
+}
