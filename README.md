@@ -15,7 +15,7 @@ To get started with `LeanxSdk`, follow these steps:
 ### Instantiate the SDK
 
 ```php
-use Wiraazharan\LeanxSdk\LeanxSdk;
+use Leanx\LeanxSdk\LeanxSdk;
 
 // Base URL for LeanX API (use sandbox or live URL as needed)
 $baseUrl = 'https://api.leanx.dev';
