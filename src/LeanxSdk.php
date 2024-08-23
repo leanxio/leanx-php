@@ -235,6 +235,748 @@ class LeanxSdk
     }
     //HMAC ENDPOINTS;
 
+    //JOIN ENDPOINTS
+    public function GetPoolBalance(array $parameters = [], $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/overall-balance";
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/overall-balance";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function CreateCollection(array $parameters = [], $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/create-payment-collection";
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/create-payment-collection";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function GetCollectionList($parameters, $skip, $limit, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/collection-list";
+        $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/collection-list";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function GetSpecificCollection($collectionId, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/payment-collection";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/payment-collection";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [
+            "_id" => $collectionId
+        ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function UpdateCollection($parameters, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/update-payment-collection";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "PUT";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/update-payment-collection";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PutRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function ActivateCollection($collectionId, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/activate-payment-collection";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/activate-payment-collection";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [
+            "_id" => $collectionId
+        ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PutRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function DeactivateCollection($collectionId, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/deactivate-payment-collection";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "PUT";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/deactivate-payment-collection";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [
+            "_id" => $collectionId
+        ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PutRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function TransactionList($skip, $limit, $startDate = "01-01-1970", $endDate = "31-01-2099", $invoiceStatus = "SUCCESS", $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/transaction-list";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        $HTTPMETHOD = "GET";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/transaction-list";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->GetRequestMam($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function PayoutServiceList($parameters = [], $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/list-payout-services";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/list-payout-services";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function PayoutTransactionList($parameters, $skip, $limit, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/payout-transaction-list";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/payout-transaction-list";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function CreatePayout($parameters, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/create-payout-invoice";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/create-payout-invoice";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function PayoutStatus($invoiceNoOrExternalInvoiceRef, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/get-payout-transaction-by-id";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        $QUERYSTRING = "?_id=" . $invoiceNoOrExternalInvoiceRef;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/get-payout-transaction-by-id";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function BankAccountValidation($parameters, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/check-verification-bank";
+        // ?skip=0&limit=10&start_date=01-01-1970&end_date=31-01-2099
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit . "&start_date=" . $startDate . "&end_date=" . $endDate . "&invoice_status=" . $invoiceStatus;
+        // $QUERYSTRING = "?_id=" . $invoiceNoOrExternalInvoiceRef;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/check-verification-bank";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // $parameters = [];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+
+    public function GetBillList($parameters, $skip, $limit, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/bill-list";
+        $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/bill-list";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function GetSpecificBill($billId, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/bill-id";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/bill-id";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [
+            "_id" => $billId
+        ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function GetBillTransactionStatus($billNo, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/manual-checking-transaction";
+        $QUERYSTRING = "?invoice_no=" . $billNo;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH . $QUERYSTRING;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/manual-checking-transaction";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        $parameters = [
+            "_id" => $billNo
+        ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function CreateBill($parameters, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/create-bill-page";
+        // $QUERYSTRING = "?invoice_no=" . $billNo;
+        $HTTPMETHOD = "POST";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/create-bill-page";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // $parameters = [
+        //     "_id" => $billNo
+        // ];
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PostRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    public function UpdateBill($parameters, $useHmac = false)
+    {
+        $URLPATH = "/api/v1/merchant/update-bill";
+        // $QUERYSTRING = "?skip=" . $skip . "&limit=" . $limit;
+        $HTTPMETHOD = "PUT";
+        $endpoint = $this->baseUrl . $URLPATH;
+        $header = [
+            'Content-Type' => 'application/json',
+            'auth-token' => $this->authToken,
+        ];
+
+        if ($useHmac) {
+            //GENERATE SIGNATURE
+            $URLPATHFORSIGNATURE = "/api/v1/merchant/update-bill";
+            $signatures = $this->GenerateSignature($this->UUID, $this->authToken, $this->hashKey, $HTTPMETHOD, $URLPATHFORSIGNATURE);
+            //GENERATE SIGNATURE
+
+            $header = [
+                'x-signature' => $signatures["x-signature"],
+                'x-timestamp' => $signatures["x-timestamp"],
+                'x-nonce' => $signatures["x-nonce"],
+            ];
+        }
+
+        // Prepare the request body
+        $body = $parameters;
+
+        // Make the POST request and get the response
+        $response = json_decode($this->PutRequestMamJsonBody($endpoint, $header, $body));
+
+        // Prepare and return the response details
+        $responses = [
+            // "url" => $endpoint,
+            // "header" => $header,
+            // "body" => $body,
+            "response" => $response,
+        ];
+        return $responses;
+    }
+    //JOIN ENDPOINTS
+
 
     //DECODE CALLBACK
     public function DecodeCallback($payload)
@@ -260,7 +1002,6 @@ class LeanxSdk
 
 
     //TOOLBOX
-
     protected function sendRequest(string $method, string $endpoint, array $parameters = [], bool $json = false)
     {
         $url = $this->baseUrl . $endpoint;
@@ -368,6 +1109,53 @@ class LeanxSdk
             }
         }
     }
+    protected static function GetRequestMam($endpoint, $header = null, $body)
+    {
+
+        try {
+            if ($header == null) {
+                $client = new Client([
+                    'headers' => [
+                        // 'Content-Type' => 'application/json',
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
+                    'verify' => env('SSL_VERIFICATION', false)
+                ]);
+            } else {
+                $client = new Client([
+                    'headers' => $header,
+                    'verify' => env('SSL_VERIFICATION', false)
+                ]);
+            }
+
+            $response = $client->get(
+                $endpoint,
+                [
+                    'form_params' => $body,
+                    'timeout' => env('REQUEST_TIMEOUT_IN_SECONDS', 3000),
+                ]
+            );
+
+            return $response->getBody()->getContents();
+        } catch (RequestException $e) {
+            // $obj = new stdClass;
+            // $obj->respDesc = Psr7\str($e->getRequest());
+            // return json_encode($obj);
+            if ($e->hasResponse()) {
+                $obj = new stdClass;
+                $exception = (string) $e->getResponse()->getBody();
+                $exception = json_decode($exception);
+                $obj->statusCode = $e->getCode();
+                $obj->respDesc = $exception;
+                return json_encode($obj);
+            } else {
+                $obj = new stdClass;
+                $obj->respDesc = $e->getMessage() != null ? $e->getMessage() : "Connection Error. Check VPN and Etc..";
+                // "Connection Error. Check VPN and Etc.." ;
+                return json_encode($obj);
+            }
+        }
+    }
 
     protected static function PostRequestMamJsonBody($endpoint, $header = null, $body)
     {
@@ -389,6 +1177,53 @@ class LeanxSdk
             }
 
             $response = $client->post(
+                $endpoint,
+                [
+                    'json' => $body,
+                    'timeout' => env('REQUEST_TIMEOUT_IN_SECONDS', 3000),
+                ]
+            );
+
+            return $response->getBody()->getContents();
+        } catch (RequestException $e) {
+            // $obj = new stdClass;
+            // $obj->respDesc = Psr7\str($e->getRequest());
+            // return json_encode($obj);
+            if ($e->hasResponse()) {
+                $obj = new stdClass;
+                $exception = (string) $e->getResponse()->getBody();
+                $exception = json_decode($exception);
+                $obj->statusCode = $e->getCode();
+                $obj->respDesc = $exception;
+                return json_encode($obj);
+            } else {
+                $obj = new stdClass;
+                $obj->respDesc = $e->getMessage() != null ? $e->getMessage() : "Connection Error. Check VPN and Etc..";
+                // "Connection Error. Check VPN and Etc.." ;
+                return json_encode($obj);
+            }
+        }
+    }
+    protected static function DeleteRequestMamJsonBody($endpoint, $header = null, $body)
+    {
+
+        try {
+            if ($header == null) {
+                $client = new Client([
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        // 'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
+                    'verify' => env('SSL_VERIFICATION', false)
+                ]);
+            } else {
+                $client = new Client([
+                    'headers' => $header,
+                    'verify' => env('SSL_VERIFICATION', false)
+                ]);
+            }
+
+            $response = $client->delete(
                 $endpoint,
                 [
                     'json' => $body,
