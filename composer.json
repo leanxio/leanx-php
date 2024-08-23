@@ -1,6 +1,6 @@
 {
     "name": "leanx/leanx-php",
-    "description": "This package is to assist LeanX integration",
+    "description": "This package is designed to seamlessly integrate LeanX into your applications, providing a streamlined solution for handling all your payment processes with ease and efficiency.",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^7.0",
